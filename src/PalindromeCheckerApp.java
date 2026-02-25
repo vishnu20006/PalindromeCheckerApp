@@ -1,6 +1,5 @@
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -8,22 +7,20 @@ public class PalindromeCheckerApp {
 
         String input = "madam";
 
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> deque = new LinkedList<>();
 
         for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            queue.add(ch);
-            stack.push(ch);
+            deque.addLast(input.charAt(i));
         }
 
         boolean isPalindrome = true;
 
-        for (int i = 0; i < input.length(); i++) {
-            char fromQueue = queue.remove();
-            char fromStack = stack.pop();
+        while (deque.size() > 1) {
 
-            if (fromQueue != fromStack) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
